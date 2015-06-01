@@ -5,6 +5,7 @@ namespace trntv\tactician;
 use League\Tactician\CommandBus;
 use League\Tactician\Handler\CommandHandlerMiddleware;
 use League\Tactician\Handler\Locator\InMemoryLocator;
+use trntv\tactician\base\BaseCommand;
 use yii\base\Component;
 use yii\base\Event;
 
@@ -59,7 +60,7 @@ class Tactician extends Component
     }
 
     /**
-     * @param $command
+     * @param BaseCommand $command
      * @return mixed
      */
     public function handle($command)
@@ -68,7 +69,15 @@ class Tactician extends Component
             'data' => $command
         ]));
 
+        if (method_exists($command, 'beforeHandle')) {
+            $command->beforeHandle();
+        }
+
         $result = $this->getCommandBus()->handle($command);
+
+        if (method_exists($command, 'afterHandle')) {
+            $command->afterHandle($result);
+        }
 
         $this->trigger(self::EVENT_AFTER_HANDLE, new Event([
             'data' => $result
