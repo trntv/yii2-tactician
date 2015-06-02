@@ -6,6 +6,7 @@ use League\Tactician\CommandBus;
 use League\Tactician\Handler\CommandHandlerMiddleware;
 use League\Tactician\Handler\Locator\InMemoryLocator;
 use trntv\tactician\base\BaseCommand;
+use Yii;
 use yii\base\Component;
 use yii\base\Event;
 
@@ -26,9 +27,12 @@ class Tactician extends Component
 
     public function createCommandBus()
     {
+        $commandToHandlerMap = array_map(function ($config) {
+            return Yii::createObject($config);
+        }, $this->commandToHandlerMap);
         /** @var \League\Tactician\Handler\CommandNameExtractor\CommandNameExtractor $extractor */
         $extractor = \Yii::createObject($this->commandNameExtractor);
-        $locator = new InMemoryLocator($this->commandToHandlerMap);
+        $locator = new InMemoryLocator($commandToHandlerMap);
         /** @var \League\Tactician\Handler\MethodNameInflector\MethodNameInflector $inflector */
         $inflector = \Yii::createObject($this->methodNameInflector);
 
