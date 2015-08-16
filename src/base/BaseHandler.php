@@ -9,5 +9,9 @@ use yii\base\Object;
  */
 abstract class BaseHandler extends Object
 {
-    abstract public function handle(BaseCommand $command);
+    /**
+     * @param BaseCommand $command
+     * @return mixed
+     */
+    abstract public function handle($command);
 }

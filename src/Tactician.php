@@ -67,7 +67,30 @@ class Tactician extends Component
      * @param BaseCommand $command
      * @return mixed
      */
-    public function handle($command)
+    public function handle(BaseCommand $command)
+    {
+        return $this->handleInternal($command);
+    }
+
+    /**
+     * @param BaseCommand[] $commands
+     * @return array
+     */
+    public function handleMultiply($commands)
+    {
+        $result = [];
+        foreach($commands as $k => $command) {
+            $result[$k] = $this->handleInternal($command);
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param BaseCommand $command
+     * @return mixed
+     */
+    protected function handleInternal($command)
     {
         $this->trigger(self::EVENT_BEFORE_HANDLE, new Event([
             'data' => $command

@@ -52,4 +52,15 @@ Yii::$app->commandBus->handle(new SendEmailCommand([
     'to' => 'user@example.org',
     'body' => '...'
 ]))
+
+Yii::$app->commandBus->handleMultiply([
+    new SendEmailCommand([
+        'from' => 'email@example.org',
+        'to' => 'user@example.org',
+        'body' => '...'
+    ]),
+    new SomeOtherCommand([
+        ...
+    ])
+])
 ```
