@@ -1,6 +1,6 @@
 Yii2 Tactician
 ==============
-[Tactician](https://github.com/thephpleague/tactician) is a simple, flexible command bus. 
+[Tactician](https://github.com/thephpleague/tactician) is a simple, flexible package allows you to  easy implement Command Bus pattern in your application.
 This package provide it's very basic integration with Yii2
 
 Installation
