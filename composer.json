@@ -3,7 +3,7 @@
     "description": "A simple, flexible command bus. This package provide it's integration with Yii2",
     "type": "yii2-extension",
     "keywords": ["yii2","extension"],
-    "license": "GPL-3.0",
+    "license": "BSD-3-Clause",
     "authors": [
         {
             "name": "Eugene Terentev",
